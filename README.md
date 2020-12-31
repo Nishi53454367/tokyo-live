@@ -1,1 +1,1 @@
-# tokyo-live
+# japan-live-camera
