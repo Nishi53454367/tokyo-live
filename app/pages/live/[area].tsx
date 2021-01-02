@@ -29,7 +29,7 @@ const livePage: React.FC<Live> = ({ area, cameraList }) => {
     setCenter({ ...center, lat: location.lat, lng: location.lng });
   };
   // ウインドウクローズ
-  const disableInfoWindows = (index: number) => {
+  const disableInfoWindows = (index: number, location: Location) => {
     setInfoWindows(
       [
         ...infoWindows.slice(0, index),
@@ -37,6 +37,7 @@ const livePage: React.FC<Live> = ({ area, cameraList }) => {
         ...infoWindows.slice(index + 1),
       ],
     );
+    setCenter({ ...center, lat: location.lat, lng: location.lng });
   };
   // UI
   return (

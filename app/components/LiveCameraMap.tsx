@@ -13,7 +13,7 @@ type Props = {
   infoWindows: boolean[];
   center: Location;
   enableInfoWindows: (index: number, location: Location) => void;
-  disableInfoWindows: (index: number) => void;
+  disableInfoWindows: (index: number, location: Location) => void;
 };
 
 const mapStyle = {
@@ -51,7 +51,7 @@ const LiveCameraMap: React.FC<Props> = ({
                   lat: camera.location.lat,
                   lng: camera.location.lng,
                 }}
-                onCloseClick={() => disableInfoWindows(index)}
+                onCloseClick={() => disableInfoWindows(index, camera.location)}
               >
                 <YouTube videoId={camera.id} opts={playerOption} />
               </InfoWindow>
