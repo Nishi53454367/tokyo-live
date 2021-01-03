@@ -1,62 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import {
-  Location,
-  Area,
-  Camera,
-  Live,
-} from '../../interfaces/LiveData';
-import LiveDataList from '../../utils/LiveDataList';
+import { Area, Camera, Live } from '../../interfaces/LiveType';
+import { LiveDataList } from '../../utils/LiveData';
+import Layout from '../../components/Layout';
 import LiveCameraMap from '../../components/LiveCameraMap';
 
 // ページ本体
-const livePage: React.FC<Live> = ({ area, cameraList }) => {
-  // マーカー押下時の対象ライブカメラの描画有無
-  const [infoWindows, setInfoWindows] = useState<boolean[]>(Array(cameraList.length));
-  // マーカー押下時の中心座標
-  const [
-    center, setCenter,
-  ] = useState<Location>(area.location);
-  // ウインドウオープン(マーカー押下)
-  const enableInfoWindows = (index: number, location: Location) => {
-    setInfoWindows(
-      [
-        ...infoWindows.slice(0, index),
-        true,
-        ...infoWindows.slice(index + 1),
-      ],
-    );
-    setCenter({ ...center, lat: location.lat, lng: location.lng });
-  };
-  // ウインドウクローズ
-  const disableInfoWindows = (index: number, location: Location) => {
-    setInfoWindows(
-      [
-        ...infoWindows.slice(0, index),
-        false,
-        ...infoWindows.slice(index + 1),
-      ],
-    );
-    setCenter({ ...center, lat: location.lat, lng: location.lng });
-  };
-  // UI
-  return (
+const LivePage: React.FC<Live> = ({ area, cameraList }) => (
+  <Layout title={area.name}>
     <LiveCameraMap
+      area={area}
       cameraList={cameraList}
-      infoWindows={infoWindows}
-      center={center}
-      enableInfoWindows={enableInfoWindows}
-      disableInfoWindows={disableInfoWindows}
     />
-  );
-};
-export default livePage;
+  </Layout>
+);
+export default LivePage;
 
 // 動的ルーティング定義(〜/live/[area]のパスを生成する)
 export const getStaticPaths: GetStaticPaths = async () => {
   // paramsの中のarea:はファイル名の[area]と合わせること
   const paths = LiveDataList.map((liveData: Live) => (
-    { params: { area: liveData.area.name } }
+    { params: { area: liveData.area.pathName } }
   ));
   // これでgetStaticPropsでparamsが使用できる
   return { paths, fallback: false };
@@ -66,10 +30,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // getStaticPathsで生成されたパスを元に描画エリアとライブカメラ一覧を取得
   const areaName = params?.area;
-  let area: Area = { name: '', location: { lat: 0, lng: 0 } };
+  let area: Area = { name: '', pathName: '', location: { lat: 0, lng: 0 } };
   let cameraList: Camera[] = [];
   LiveDataList.forEach((live: Live) => {
-    if (areaName === live.area.name) {
+    if (areaName === live.area.pathName) {
       area = live.area;
       cameraList = live.cameraList;
     }

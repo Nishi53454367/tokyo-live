@@ -7,6 +7,7 @@ export type Location = {
 // GoogleMap描画エリア情報
 export type Area = {
   name: string;
+  pathName: string;
   location: Location;
 };
 

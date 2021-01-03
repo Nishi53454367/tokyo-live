@@ -1,13 +1,15 @@
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
+import React, { ReactNode } from 'react';
+import Link from 'next/link';
+import Head from 'next/head';
+import { Live } from '../interfaces/LiveType';
+import { LiveDataList } from '../utils/LiveData';
 
 type Props = {
   children?: ReactNode
   title?: string
 }
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
+const Layout: React.FC<Props> = ({ children, title }) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -15,35 +17,32 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <header>
+      <strong>日本ライブカメラ🎥</strong>
       <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/live/tokyo">
-          <a>東京</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/live/osaka">
-          <a>大阪</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/users">
-          <a>Users List</a>
-        </Link>{' '}
-        | <a href="/api/users">Users API</a>
+        <span key="live">
+          <Link href="/live">
+            全国
+          </Link>
+          |
+          {' '}
+        </span>
+        {LiveDataList.map((live: Live) => (
+          <span key={live.area.pathName}>
+            <Link href={`/live/${live.area.pathName}`}>
+              {live.area.name}
+            </Link>
+            |
+            {' '}
+          </span>
+        ))}
       </nav>
     </header>
     {children}
     <footer>
       <hr />
-      <span>I'm here to stay (Footer)</span>
+      <span>※ Youtube側の都合で動画は予告なく見れなくなる可能性があります。</span>
     </footer>
   </div>
-)
+);
 
-export default Layout
+export default Layout;
