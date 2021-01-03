@@ -30,7 +30,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // getStaticPathsで生成されたパスを元に描画エリアとライブカメラ一覧を取得
   const areaName = params?.area;
-  let area: Area = { name: '', pathName: '', location: { lat: 0, lng: 0 } };
+  let area: Area = {
+    name: '', pathName: '', location: { lat: 0, lng: 0 }, zoom: 0,
+  };
   let cameraList: Camera[] = [];
   LiveDataList.forEach((live: Live) => {
     if (areaName === live.area.pathName) {

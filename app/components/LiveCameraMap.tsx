@@ -59,7 +59,7 @@ const LiveCameraMap: React.FC<Live> = ({ area, cameraList }) => {
       <GoogleMap
         mapContainerStyle={mapStyle}
         center={{ lat: center.lat, lng: center.lng }}
-        zoom={area.pathName === '' ? 5 : 10} // 全国(area.pathNameがブランク)の場合のみ拡大し過ぎないよう調整
+        zoom={area.zoom}
       >
         {cameraList.map((camera: Camera, index) => (
           <div key={camera.id}>

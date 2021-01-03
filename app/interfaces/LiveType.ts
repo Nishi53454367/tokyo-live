@@ -9,6 +9,7 @@ export type Area = {
   name: string;
   pathName: string;
   location: Location;
+  zoom: number;
 };
 
 // Youtubeライブカメラ情報
