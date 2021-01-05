@@ -2,17 +2,14 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Area, Camera, Live } from '../../interfaces/LiveType';
 import { LiveDataList } from '../../utils/LiveData';
-import Layout from '../../components/Layout';
 import LiveCameraMap from '../../components/LiveCameraMap';
 
 // ページ本体
 const LivePage: React.FC<Live> = ({ area, cameraList }) => (
-  <Layout title={area.name}>
-    <LiveCameraMap
-      area={area}
-      cameraList={cameraList}
-    />
-  </Layout>
+  <LiveCameraMap
+    area={area}
+    cameraList={cameraList}
+  />
 );
 export default LivePage;
 

@@ -44,7 +44,8 @@
     ],
     "no-param-reassign": "off",
     "react/prop-types": "off",
-    "react/no-danger": "off"
+    "react/no-danger": "off",
+    "react/jsx-props-no-spreading": "off"
   },
   "settings": {
     "import/resolver": {

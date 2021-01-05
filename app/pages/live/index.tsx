@@ -2,17 +2,14 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import { Live } from '../../interfaces/LiveType';
 import { getNationwideLiveDataList } from '../../utils/LiveData';
-import Layout from '../../components/Layout';
 import LiveCameraMap from '../../components/LiveCameraMap';
 
 // ページ本体
 const LiveTopPage: React.FC<Live> = ({ area, cameraList }) => (
-  <Layout title="全国">
-    <LiveCameraMap
-      area={area}
-      cameraList={cameraList}
-    />
-  </Layout>
+  <LiveCameraMap
+    area={area}
+    cameraList={cameraList}
+  />
 );
 export default LiveTopPage;
 
