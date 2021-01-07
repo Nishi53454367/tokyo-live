@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Box, Typography } from '@material-ui/core';
 import { Live } from '../interfaces/LiveType';
 import { LiveDataList } from '../utils/LiveData';
 
@@ -9,40 +10,50 @@ type Props = {
   title?: string
 }
 
-const Layout: React.FC<Props> = ({ children }) => (
-  <div>
-    <Head>
-      <title>YouTube LiveCamera Map</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-    <header>
-      <strong>日本ライブカメラ🎥</strong>
-      <nav>
-        <span key="live">
-          <Link href="/live">
-            全国
-          </Link>
-          |
-          {' '}
-        </span>
-        {LiveDataList.map((live: Live) => (
-          <span key={live.area.pathName}>
-            <Link href={`/live/${live.area.pathName}`}>
-              {live.area.name}
-            </Link>
-            |
-            {' '}
-          </span>
-        ))}
-      </nav>
-    </header>
-    {children}
-    <footer>
+const labelColor = '#eaf6f8';
+
+const useStyles = makeStyles(() => createStyles({
+  header: {
+    width: '100%',
+  },
+  title: {
+    padding: 3,
+    textDecoration: 'none',
+  },
+  footer: {
+    marginLeft: 5,
+    color: labelColor,
+  },
+}));
+
+const Layout: React.FC<Props> = ({ children }) => {
+  const classes = useStyles();
+  return (
+    <div>
+      <header>
+        <div className={classes.header}>
+          <Box display="flex" p={0}>
+            <Box p={1} flexGrow={1} color={labelColor}>
+              <span className={classes.title}>
+                <Link href="/live">YouTube LiveCamera Map</Link>
+              </span>
+            </Box>
+            <Box p={1} color={labelColor}>
+              test
+            </Box>
+          </Box>
+        </div>
+      </header>
+      {children}
       <hr />
-      <span>※ Youtube側の都合で動画は予告なく見れなくなる可能性があります。</span>
-    </footer>
-  </div>
-);
+      <footer className={classes.footer}>
+        <Typography variant="caption" display="block" gutterBottom>
+          <li>YouTube側の都合で動画は予告なく見れなくなる可能性があります</li>
+          <li>地図上の座標(YouTubeアイコン)は実際のカメラ設置場所から多少ズレていることがあります</li>
+        </Typography>
+      </footer>
+    </div>
+  );
+};
 
 export default Layout;
