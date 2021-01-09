@@ -9,7 +9,7 @@ import YouTube from 'react-youtube';
 import { Location, Camera, Live } from '../interfaces/LiveType';
 
 const mapStyle = {
-  height: '87vh',
+  height: '85vh',
   width: '100%',
 };
 
