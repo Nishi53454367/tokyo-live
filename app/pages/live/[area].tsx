@@ -19,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = LiveDataList.map((liveData: Live) => (
     { params: { area: liveData.area.pathName } }
   ));
-  // これでgetStaticPropsでparamsが使用できる
+  // これでgetStaticPropsでparamsが使用できる(fallback=falseで存在しないページは全て404)
   return { paths, fallback: false };
 };
 
