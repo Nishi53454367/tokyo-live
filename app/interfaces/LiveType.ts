@@ -7,19 +7,31 @@ export type Location = {
 // GoogleMap描画エリア情報
 export type Area = {
   name: string;
-  pathName: string;
   location: Location;
   zoom: number;
 };
 
-// Youtubeライブカメラ情報
-export type Camera = {
-  id: string;
+// YouTubeライブカメラ情報
+export type CameraInfo = {
+  channelId: string;
+  q: string;
   location: Location;
 };
 
-// 描画エリア上のライブカメラ
-export type Live = {
+// エリアごとのライブカメラ情報
+export type LiveInfo = {
+  area: Area;
+  cameraInfoList: CameraInfo[];
+};
+
+// YouTubeライブカメラ(描画データ)
+export type Camera = {
+  videoId: string;
+  location: Location;
+};
+
+// 画面Props
+export type LiveProps = {
   area: Area;
   cameraList: Camera[];
 };
