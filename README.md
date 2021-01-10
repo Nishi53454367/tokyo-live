@@ -1,4 +1,5 @@
 # youtube-liveCamera-map
+YouTubeの街角ライブ配信をGoogleMap上で見れるサービスです。
 
 # コンテナ起動手順
 ビルド
