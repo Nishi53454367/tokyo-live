@@ -10,6 +10,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link rel="icon" href="./Camera-icon-32.png" type="image/x-icon" />
           <title>YouTube LiveCamera Map</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
           {/* PWA primary color */}
