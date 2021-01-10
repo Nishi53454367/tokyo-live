@@ -54,7 +54,7 @@ const LiveCameraMap: React.FC<Live> = ({ area, cameraList }) => {
   // UI
   return (
     <LoadScript
-      googleMapsApiKey={String(process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY)}
+      googleMapsApiKey={String(process.env.NEXT_PUBLIC_GOOGLE_API_KEY)}
     >
       <GoogleMap
         mapContainerStyle={mapStyle}
