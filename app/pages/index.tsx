@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const liveInfo: LiveInfo = getNationwideLiveInfoList();
   // ライブカメラ情報一覧を元にPropsに設定するデータを作成
   const cameraList: Camera[] = [];
-  for (const cameraInfo of liveInfo.cameraInfoList) {
+  for await (const cameraInfo of liveInfo.cameraInfoList) {
     const searchAPIParams: SearchAPIParams = {
       part: 'snippet',
       type: 'video',
