@@ -14,6 +14,7 @@ export const LiveInfoList: LiveInfo[] = [
       { channelId: 'UCbTLJi8lXWIt_d1AtRv4Nmw', q: '汐留', location: { lat: 35.659664, lng: 139.759321 } },
       { channelId: 'UC1XCOdrEKT1QzJ_hYf5DKaQ', q: '築地本願寺', location: { lat: 35.666699191623785, lng: 139.77229064204482 } },
       { channelId: 'UChRQpufaxclkezElsQ04VXw', q: 'オノデン', location: { lat: 35.698295, lng: 139.771001 } },
+      { channelId: 'UCJrDvNbGDWn0NcxhOyG8TmA', q: '千鳥ヶ淵', location: { lat: 35.690966, lng: 139.747651 } },
     ],
   },
   {
