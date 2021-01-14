@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Box, Typography } from '@material-ui/core';
-import Select, { ValueType } from 'react-select';
+import { ValueType } from 'react-select';
 import {
   LoadScript,
   GoogleMap,
@@ -9,13 +7,12 @@ import {
   InfoWindow,
 } from '@react-google-maps/api';
 import YouTube from 'react-youtube';
+import Layout from './Layout';
 import {
   Location,
-  LiveInfo,
   Camera,
   LiveProps,
 } from '../interfaces/LiveType';
-import { LiveInfoList } from '../utils/LiveDataInfo';
 
 // GoogleMapサイズ
 const mapStyle = {
@@ -29,34 +26,8 @@ const playerOption = {
   width: '360',
 };
 
-// 選択エリア
-const options = LiveInfoList.map((liveInfo: LiveInfo) => ({
-  label: liveInfo.area.name,
-  value: { location: liveInfo.area.location, zoom: liveInfo.area.zoom },
-}));
-
-// style
-const labelColor = '#eaf6f8';
-const useStyles = makeStyles(() => createStyles({
-  header: {
-    width: '100%',
-  },
-  select: {
-    minWidth: 200,
-  },
-  attention: {
-    textAlign: 'right',
-    color: labelColor,
-  },
-  footer: {
-    textAlign: 'center',
-    color: labelColor,
-  },
-}));
-
+// ライブカメラマップ
 const LiveCameraMap: React.FC<LiveProps> = ({ area, cameraList }) => {
-  const classes = useStyles();
-
   // ライブカメラの表示・非表示
   const [infoWindows, setInfoWindows] = useState<boolean[]>(Array(cameraList.length));
   // 中心座標
@@ -100,27 +71,8 @@ const LiveCameraMap: React.FC<LiveProps> = ({ area, cameraList }) => {
     setCenter({ ...center, lat: location.lat, lng: location.lng });
   };
 
-  // UI
   return (
-    <div>
-      <header>
-        <div className={classes.header}>
-          <Box display="flex" p={0}>
-            <Box p={1} flexGrow={1} color={labelColor}>
-              <Typography variant="h6">
-                YouTube LiveCamera Map
-              </Typography>
-            </Box>
-            <Box p={1} className={classes.select}>
-              <Select
-                placeholder="都道府県を絞り込む"
-                options={options}
-                onChange={(option) => selectArea(option)}
-              />
-            </Box>
-          </Box>
-        </div>
-      </header>
+    <Layout selectArea={selectArea}>
       <LoadScript
         googleMapsApiKey={String(process.env.NEXT_PUBLIC_GOOGLE_API_KEY)}
       >
@@ -153,18 +105,7 @@ const LiveCameraMap: React.FC<LiveProps> = ({ area, cameraList }) => {
           ))}
         </GoogleMap>
       </LoadScript>
-      <div className={classes.attention}>
-        <Typography variant="overline">
-          カメラ座標のズレや予告なく動画が見れなくなる場合があるので予めご了承ください。
-        </Typography>
-      </div>
-      <hr style={{ margin: 0 }} />
-      <footer className={classes.footer}>
-        <Typography variant="caption" display="block" gutterBottom>
-          © 2021 Nishi53454367
-        </Typography>
-      </footer>
-    </div>
+    </Layout>
   );
 };
 
