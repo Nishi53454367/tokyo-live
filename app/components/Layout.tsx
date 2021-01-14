@@ -63,7 +63,7 @@ const Layout: React.FC<Props> = ({ children, selectArea }) => {
       </header>
       {children}
       <Typography variant="overline" className={classes.link}>
-        <Link href="/about">このサイトについて</Link>
+        <Link href="/about">このサービスについて</Link>
       </Typography>
       <Typography variant="overline" className={classes.link}>
         <Link href="/policy">プライバシーポリシー</Link>

@@ -12,9 +12,7 @@ const policy: React.FC = () => (
       <div>この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。</div>
       <div>
         規約に関しての詳細は
-        <a target="_blank" rel="noreferrer" href="https://marketingplatform.google.com/about/analytics/terms/jp/">Googleアナリティクスサービス利用規約</a>
-        や
-        <a target="_blank" rel="noreferrer" href="https://policies.google.com/technologies/ads?hl=ja/">Googleポリシーと規約</a>
+        <a target="_blank" rel="noreferrer" href="https://marketingplatform.google.com/about/analytics/terms/jp/">Googleアナリティクス利用規約</a>
         をご覧ください。
       </div>
     </div>
