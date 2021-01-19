@@ -34,10 +34,12 @@ export const getStaticProps: GetStaticProps = async () => {
     };
     const response: SearchResponse = await LiveDataSearch(searchAPIParams);
     if (RegExp(/^2[0-9]{2}$/u).test(response.statusCode)) {
-      cameraList.push({
-        videoId: response.result.items[0].id.videoId,
-        location: cameraInfo.location,
-      });
+      if (response.result.items.length === 1) {
+        cameraList.push({
+          videoId: response.result.items[0].id.videoId,
+          location: cameraInfo.location,
+        });
+      }
     }
   }
   // Props返却(これでページ本体(IndexPage)で使用できる)
