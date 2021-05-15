@@ -22,6 +22,16 @@ const GetCameraInfoList = (): CameraInfo[] => [
     channelId: 'UCJrDvNbGDWn0NcxhOyG8TmA', q: '千鳥ヶ淵', location: { lat: 35.690966, lng: 139.747651 }, videoId: 'yIoPisyFE64',
   },
 
+  // 神奈川
+  {
+    channelId: 'UCKtFn0R-NGm6cocqdoGAQTA', q: '横浜汽車道', location: { lat: 35.452190678008606, lng: 139.63524405749328 }, videoId: 'bUIhlxNMeCU',
+  },
+
+  // 群馬
+  {
+    channelId: 'UCbn5eHDjwmPC2K9RG8P0i_A', q: '草津温泉「湯畑」湯滝前', location: { lat: 36.62338661406197, lng: 138.59692722865566 }, videoId: 'GzbPVzPnT-U',
+  },
+
   // 山梨
   {
     channelId: 'UCiIA2H7KnbK7Wsyhpw1_glw', q: '河口湖駅前', location: { lat: 35.498530043145216, lng: 138.76882169762285 }, videoId: 'tLQOIro0kgc',
