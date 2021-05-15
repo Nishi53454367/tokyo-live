@@ -3,7 +3,7 @@ import Document, {
   Html, Head, Main, NextScript,
 } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../utils/theme';
+import DefaultTheme from '../utils/DefaultTheme';
 import { GA_TRACKING_ID } from '../lib/gtag';
 
 export default class MyDocument extends Document {
@@ -15,7 +15,7 @@ export default class MyDocument extends Document {
           <title>YouTube LiveCamera Map</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
           {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="theme-color" content={DefaultTheme.palette.primary.main} />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

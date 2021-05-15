@@ -3,17 +3,13 @@ import Link from 'next/link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
 import Select, { ValueType } from 'react-select';
-import { Location, LiveInfo } from '../interfaces/LiveType';
-import { LiveInfoList } from '../utils/LiveDataInfo';
+import { Location, CameraInfo } from '../interfaces/type';
+import GetCameraInfoList from '../utils/GetCameraInfoList';
 
-// 選択エリア
-const options = LiveInfoList.map((liveInfo: LiveInfo) => ({
-  label: liveInfo.area.name,
-  value: { location: liveInfo.area.location, zoom: liveInfo.area.zoom },
-}));
+/** 文字色 */
+const LABEL_COLOR = '#46697E';
 
-// style
-const labelColor = '#46697E';
+/** style */
 const useStyles = makeStyles(() => createStyles({
   header: {
     width: '100%',
@@ -26,35 +22,44 @@ const useStyles = makeStyles(() => createStyles({
   },
   footer: {
     textAlign: 'center',
-    color: labelColor,
+    color: LABEL_COLOR,
   },
 }));
 
+/** リスト選択肢を取得 */
+const getOptions = () => {
+  const nationwideLiveInfoList = GetCameraInfoList();
+  return nationwideLiveInfoList.map((cameraInfo: CameraInfo) => ({
+    label: cameraInfo.q,
+    value: { location: cameraInfo.location },
+  }));
+};
+
 type Props = {
-  selectArea?: (
-    option: ValueType<{ label: string; value: { location: Location, zoom: number } }, false>
+  selectCamera?: (
+    option: ValueType<{ label: string; value: { location: Location } }, false>
   ) => void;
 }
 
-// 共通レイアウト
-const Layout: React.FC<Props> = ({ children, selectArea }) => {
+/** 共通レイアウト */
+const Layout: React.FC<Props> = ({ children, selectCamera }) => {
   const classes = useStyles();
   return (
     <div>
       <header>
         <div className={classes.header}>
           <Box display="flex" p={0}>
-            <Box p={1} flexGrow={1} color={labelColor}>
+            <Box p={1} flexGrow={1} color={LABEL_COLOR}>
               <Typography variant="h6">
                 YouTube LiveCamera Map
               </Typography>
             </Box>
-            {selectArea ? (
+            {selectCamera ? (
               <Box p={1} className={classes.select}>
                 <Select
-                  placeholder="都道府県を絞り込む"
-                  options={options}
-                  onChange={(option) => selectArea(option)}
+                  placeholder="カメラを選択"
+                  options={getOptions()}
+                  onChange={(option) => selectCamera(option)}
                 />
               </Box>
             ) : undefined}

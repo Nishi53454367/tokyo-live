@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Button } from '@material-ui/core';
 import Layout from './Layout';
 
-// style
+/** style */
 const useStyles = makeStyles(() => createStyles({
   card: {
     margin: 10,
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => createStyles({
   },
 }));
 
-// このサイトについて、プライバシーポリシー専用レイアウト
+/** このサイトについて、プライバシーポリシー専用レイアウト */
 const Board: React.FC = ({ children }) => {
   const classes = useStyles();
   const router = useRouter();
