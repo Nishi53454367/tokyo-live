@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ValueType } from 'react-select';
 import {
   LoadScript,
@@ -8,47 +8,53 @@ import {
 } from '@react-google-maps/api';
 import YouTube from 'react-youtube';
 import Layout from './Layout';
-import {
-  Location,
-  Camera,
-  LiveProps,
-} from '../interfaces/LiveType';
+import { Location, CameraInfo } from '../interfaces/type';
 
-// GoogleMapサイズ
-const mapStyle = {
+/** GoogleMapサイズ */
+const MAP_STYLE = {
   height: '85vh',
   width: '100%',
 };
 
-// YouTubePlayerオプション
-const playerOption = {
+/** YouTubePlayerオプション */
+const PLAYER_OPTION = {
   height: '240',
   width: '360',
 };
 
-// ライブカメラマップ
-const LiveCameraMap: React.FC<LiveProps> = ({ area, cameraList }) => {
-  // ライブカメラの表示・非表示
+type Props = {
+  cameraList: CameraInfo[];
+};
+
+/** ライブカメラマップ */
+const LiveCameraMap: React.FC<Props> = ({ cameraList }) => {
+  /** GoogleMap Ref */
+  const mapRef = useRef<any>();
+
+  /** ライブカメラの表示・非表示 */
   const [infoWindows, setInfoWindows] = useState<boolean[]>(Array(cameraList.length));
-  // 中心座標
+
+  /** 中心座標(初期値：日本全体) */
   const [
     center, setCenter,
-  ] = useState<Location>(area.location);
-  // 拡大比率
-  const [zoom, setZoom] = useState<number>(area.zoom);
+  ] = useState<Location>({ lat: 38.6803521, lng: 140.1719602 });
 
-  // エリア選択
-  const selectArea = (
-    option: ValueType<{ label: string; value: { location: Location, zoom: number } }, false>,
+  /** 拡大比率(初期値：日本全体) */
+  const [zoom, setZoom] = useState<number>(5.2);
+
+  /** カメラ選択 */
+  const selectCamera = (
+    option: ValueType<{ label: string; value: { location: Location } }, false>,
   ) => {
     setCenter({
       ...center,
       lat: Number(option?.value.location.lat),
       lng: Number(option?.value.location.lng),
     });
-    setZoom(Number(option?.value.zoom));
+    setZoom(Number(15));
   };
-  // ライブカメラ表示(マーカー押下)
+
+  /** ライブカメラ表示(マーカー押下) */
   const enableInfoWindows = (index: number, location: Location) => {
     setInfoWindows(
       [
@@ -59,7 +65,8 @@ const LiveCameraMap: React.FC<LiveProps> = ({ area, cameraList }) => {
     );
     setCenter({ ...center, lat: location.lat, lng: location.lng });
   };
-  // ライブカメラ非表示(クローズ押下)
+
+  /** ライブカメラ非表示(クローズ押下) */
   const disableInfoWindows = (index: number, location: Location) => {
     setInfoWindows(
       [
@@ -72,32 +79,39 @@ const LiveCameraMap: React.FC<LiveProps> = ({ area, cameraList }) => {
   };
 
   return (
-    <Layout selectArea={selectArea}>
+    <Layout selectCamera={selectCamera}>
       <LoadScript
         googleMapsApiKey={String(process.env.NEXT_PUBLIC_GOOGLE_API_KEY)}
       >
         <GoogleMap
-          mapContainerStyle={mapStyle}
+          mapContainerStyle={MAP_STYLE}
+          onLoad={(map: any) => { mapRef.current = map; }}
           center={{ lat: center.lat, lng: center.lng }}
           zoom={zoom}
         >
-          {cameraList.map((camera: Camera, index) => (
-            <div key={camera.videoId}>
+          {cameraList.map((cameraInfo: CameraInfo, index) => (
+            <div key={cameraInfo.videoId}>
               <Marker
                 icon={{ url: '/YouTube-icon-32.png' }}
-                position={{ lat: camera.location.lat, lng: camera.location.lng }}
-                onClick={() => enableInfoWindows(index, camera.location)}
+                position={{ lat: cameraInfo.location.lat, lng: cameraInfo.location.lng }}
+                onClick={() => enableInfoWindows(index, cameraInfo.location)}
               />
               {
                 infoWindows[index] ? (
                   <InfoWindow
                     position={{
-                      lat: camera.location.lat,
-                      lng: camera.location.lng,
+                      lat: cameraInfo.location.lat,
+                      lng: cameraInfo.location.lng,
                     }}
-                    onCloseClick={() => disableInfoWindows(index, camera.location)}
+                    onCloseClick={() => {
+                      // クローズ時に中心座標がカメラの座標に戻らないよう現在の中心座標を取得して設定
+                      const currentCenter = mapRef.current.getCenter().toJSON();
+                      disableInfoWindows(
+                        index, { lat: Number(currentCenter.lat), lng: Number(currentCenter.lng) },
+                      );
+                    }}
                   >
-                    <YouTube videoId={camera.videoId} opts={playerOption} />
+                    <YouTube videoId={cameraInfo.videoId} opts={PLAYER_OPTION} />
                   </InfoWindow>
                 ) : ''
               }

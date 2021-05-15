@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../utils/theme';
+import DefaultTheme from '../utils/DefaultTheme';
 import * as gtag from '../lib/gtag';
 
 export default function MyApp(props: AppProps): JSX.Element {
@@ -30,7 +30,7 @@ export default function MyApp(props: AppProps): JSX.Element {
   }, [router.events]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={DefaultTheme}>
       {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
       <Component {...pageProps} />
