@@ -41,6 +41,16 @@ const GetCameraInfoList = (): CameraInfo[] => [
   {
     channelId: 'UCQ2mmGKtrBp6rL8tSMJCCwA', q: '道頓堀', location: { lat: 34.668886, lng: 135.501285 }, videoId: 'jdUVPRrjBPw',
   },
+
+  // 兵庫
+  {
+    channelId: 'UCnpKhR0jbJgGyvKr5BaRt9w', q: '明石海峡大橋', location: { lat: 34.633529452359326, lng: 135.0344058782148 }, videoId: 'gLUx48f1wH4',
+  },
+
+  // 愛媛
+  {
+    channelId: 'UClAtpDytL1hmOUeiJaNrHlQ', q: '道後温泉本館ライブカメラ（本館カメラ）', location: { lat: 33.85218000114081, lng: 132.78605045021052 }, videoId: '4vpIzKSWL7k',
+  },
 ];
 
 export default GetCameraInfoList;
