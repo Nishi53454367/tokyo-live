@@ -79,7 +79,7 @@ const LiveCameraMap: React.FC<Props> = ({ cameraList }) => {
   };
 
   return (
-    <Layout selectCamera={selectCamera}>
+    <Layout cameraList={cameraList} selectCamera={selectCamera}>
       <LoadScript
         googleMapsApiKey={String(process.env.NEXT_PUBLIC_GOOGLE_API_KEY)}
       >

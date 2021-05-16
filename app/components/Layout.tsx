@@ -4,7 +4,6 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
 import Select, { ValueType } from 'react-select';
 import { Location, CameraInfo } from '../interfaces/type';
-import GetCameraInfoList from '../utils/GetCameraInfoList';
 
 /** 文字色 */
 const LABEL_COLOR = '#46697E';
@@ -26,24 +25,23 @@ const useStyles = makeStyles(() => createStyles({
   },
 }));
 
-/** リスト選択肢を取得 */
-const getOptions = () => {
-  const nationwideLiveInfoList = GetCameraInfoList();
-  return nationwideLiveInfoList.map((cameraInfo: CameraInfo) => ({
-    label: cameraInfo.q,
-    value: { location: cameraInfo.location },
-  }));
-};
-
 type Props = {
+  cameraList: CameraInfo[];
   selectCamera?: (
     option: ValueType<{ label: string; value: { location: Location } }, false>
   ) => void;
 }
 
 /** 共通レイアウト */
-const Layout: React.FC<Props> = ({ children, selectCamera }) => {
+const Layout: React.FC<Props> = ({ children, cameraList, selectCamera }) => {
   const classes = useStyles();
+
+  /** リスト選択肢を取得 */
+  const getOptions = () => cameraList.map((cameraInfo: CameraInfo) => ({
+    label: cameraInfo.q,
+    value: { location: cameraInfo.location },
+  }));
+
   return (
     <div>
       <header>
