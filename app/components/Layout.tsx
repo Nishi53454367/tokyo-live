@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => createStyles({
 }));
 
 type Props = {
-  cameraList: CameraInfo[];
+  cameraList?: CameraInfo[];
   selectCamera?: (
     option: ValueType<{ label: string; value: { location: Location } }, false>
   ) => void;
@@ -37,7 +37,7 @@ const Layout: React.FC<Props> = ({ children, cameraList, selectCamera }) => {
   const classes = useStyles();
 
   /** リスト選択肢を取得 */
-  const getOptions = () => cameraList.map((cameraInfo: CameraInfo) => ({
+  const getOptions = () => cameraList?.map((cameraInfo: CameraInfo) => ({
     label: cameraInfo.q,
     value: { location: cameraInfo.location },
   }));
