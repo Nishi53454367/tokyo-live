@@ -48,7 +48,12 @@ export const getStaticProps: GetStaticProps = async () => {
           location: cameraInfo.location,
           videoId: response.result.items[0].id.videoId,
         });
+        console.log(`${cameraInfo.q} videoId: ${response.result.items[0].id.videoId}`);
+      } else {
+        console.log(`${cameraInfo.q} 取得失敗`);
       }
+    } else {
+      console.log(`${cameraInfo.q} 取得失敗`);
     }
   }
   return { props: { cameraList } };
