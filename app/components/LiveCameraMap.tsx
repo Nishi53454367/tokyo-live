@@ -4,6 +4,7 @@ import {
   LoadScript,
   GoogleMap,
   Marker,
+  MarkerClusterer,
   InfoWindow,
 } from '@react-google-maps/api';
 import YouTube from 'react-youtube';
@@ -14,6 +15,13 @@ import { Location, CameraInfo } from '../interfaces/type';
 const MAP_STYLE = {
   height: '85vh',
   width: '100%',
+};
+
+/** マーカークラスターオプション */
+const MARKER_CLUSTERER_OPTION = {
+  gridSize: 20,
+  maxZoom: 15,
+  minimumClusterSize: 1,
 };
 
 /** YouTubePlayerオプション */
@@ -89,34 +97,37 @@ const LiveCameraMap: React.FC<Props> = ({ cameraList }) => {
           center={{ lat: center.lat, lng: center.lng }}
           zoom={zoom}
         >
-          {cameraList.map((cameraInfo: CameraInfo, index) => (
-            <div key={cameraInfo.videoId}>
-              <Marker
-                icon={{ url: '/YouTube-icon-32.png' }}
-                position={{ lat: cameraInfo.location.lat, lng: cameraInfo.location.lng }}
-                onClick={() => enableInfoWindows(index, cameraInfo.location)}
-              />
-              {
-                infoWindows[index] ? (
-                  <InfoWindow
-                    position={{
-                      lat: cameraInfo.location.lat,
-                      lng: cameraInfo.location.lng,
-                    }}
-                    onCloseClick={() => {
-                      // クローズ時に中心座標がカメラの座標に戻らないよう現在の中心座標を取得して設定
-                      const currentCenter = mapRef.current.getCenter().toJSON();
-                      disableInfoWindows(
-                        index, { lat: Number(currentCenter.lat), lng: Number(currentCenter.lng) },
-                      );
-                    }}
-                  >
-                    <YouTube videoId={cameraInfo.videoId} opts={PLAYER_OPTION} />
-                  </InfoWindow>
-                ) : ''
-              }
-            </div>
-          ))}
+          <MarkerClusterer options={MARKER_CLUSTERER_OPTION}>
+            {(clusterer) => cameraList.map((cameraInfo: CameraInfo, index) => (
+              <div key={cameraInfo.videoId}>
+                <Marker
+                  icon={{ url: '/YouTube-icon-32.png' }}
+                  clusterer={clusterer}
+                  position={{ lat: cameraInfo.location.lat, lng: cameraInfo.location.lng }}
+                  onClick={() => enableInfoWindows(index, cameraInfo.location)}
+                />
+                {
+                  infoWindows[index] ? (
+                    <InfoWindow
+                      position={{
+                        lat: cameraInfo.location.lat,
+                        lng: cameraInfo.location.lng,
+                      }}
+                      onCloseClick={() => {
+                        // クローズ時に中心座標がカメラの座標に戻らないよう現在の中心座標を取得して設定
+                        const currentCenter = mapRef.current.getCenter().toJSON();
+                        disableInfoWindows(
+                          index, { lat: Number(currentCenter.lat), lng: Number(currentCenter.lng) },
+                        );
+                      }}
+                    >
+                      <YouTube videoId={cameraInfo.videoId} opts={PLAYER_OPTION} />
+                    </InfoWindow>
+                  ) : ''
+                }
+              </div>
+            ))}
+          </MarkerClusterer>
         </GoogleMap>
       </LoadScript>
     </Layout>
