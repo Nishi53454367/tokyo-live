@@ -32,6 +32,14 @@ const GetCameraInfoList = (): CameraInfo[] => [
     channelId: 'UCKtFn0R-NGm6cocqdoGAQTA', q: '横浜汽車道', location: { lat: 35.452190678008606, lng: 139.63524405749328 }, videoId: 'bUIhlxNMeCU',
   },
 
+  // 静岡
+  {
+    channelId: 'UCkUdb6wh-TE9MK7Q2VTE5-A', q: 'さった峠　広重の富士山', location: { lat: 35.071539263806514, lng: 138.54125932519224 }, videoId: 'CWNjN2bYzsA',
+  },
+  {
+    channelId: 'UCJKH8wYxFYeufDnvy1MPofA', q: '［ザザシティ浜松］PTZ', location: { lat: 34.70537327557009, lng: 137.73012470697802 }, videoId: 'rJhqEueJf9U',
+  },
+
   // 群馬
   {
     channelId: 'UCbn5eHDjwmPC2K9RG8P0i_A', q: '草津温泉「湯畑」湯滝前', location: { lat: 36.62338661406197, lng: 138.59692722865566 }, videoId: 'GzbPVzPnT-U',
@@ -70,6 +78,11 @@ const GetCameraInfoList = (): CameraInfo[] => [
   // 鹿児島
   {
     channelId: 'UCynXCHprmOfyGzGSnqgp6Wg', q: '桜島と鹿児島市内', location: { lat: 31.575231222557242, lng: 130.52634223469576 }, videoId: 'i5MyvNYBCtI',
+  },
+
+  // 沖縄
+  {
+    channelId: 'UCUUH2KqMbaWF5ywYItYQcMQ', q: '石垣島', location: { lat: 24.33798997974339, lng: 124.15761501636929 }, videoId: '_KCqyXtqTzk',
   },
 ];
 
