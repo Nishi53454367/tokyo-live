@@ -9,7 +9,7 @@ import { GA_TRACKING_ID } from '../lib/gtag';
 export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
-      <Html lang="en">
+      <Html>
         <Head>
           <link rel="icon" href="./Camera-icon-32.png" type="image/x-icon" />
           <title>YouTube LiveCamera Map</title>
