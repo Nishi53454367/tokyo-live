@@ -28,14 +28,11 @@ const GetCameraInfoList = (): CameraInfo[] => [
     channelId: 'UCGCZAYq5Xxojl_tSXcVJhiQ', q: '渋谷スクランブル交差点', location: { lat: 35.659707, lng: 139.70046 }, videoId: 'HpdO5Kq3o7Y',
   },
   {
-    channelId: 'UCbTLJi8lXWIt_d1AtRv4Nmw', q: '汐留', location: { lat: 35.659664, lng: 139.759321 }, videoId: 'QOjmvL3e7Lc',
-  },
-  {
     channelId: 'UCKyXyJMijwyBebgI9wmzFcw', q: '東京タワー', location: { lat: 35.65858, lng: 139.745406 }, videoId: 'SiT4cyLwc8s',
   },
   // 山梨
   {
-    channelId: 'UCiIA2H7KnbK7Wsyhpw1_glw', q: '河口湖駅前', location: { lat: 35.498530043145216, lng: 138.76882169762285 }, videoId: 'tLQOIro0kgc',
+    channelId: 'UCiIA2H7KnbK7Wsyhpw1_glw', q: '河口湖駅前', location: { lat: 35.49885184146962, lng: 138.76847864716748 }, videoId: 'tLQOIro0kgc',
   },
   // 神奈川
   {
