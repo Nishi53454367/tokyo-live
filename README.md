@@ -1,20 +1,31 @@
 # youtube-liveCamera-map
-YouTubeの街角ライブ配信をGoogleMap上で見れるサービスです。
+YouTubeのライブ配信をGoogleMap上で見れるサービスです。
 
-# コンテナ起動手順
-ビルド
+こちらのQiita記事で紹介しています。  
+https://qiita.com/Nishi53454367/items/dc144f0e1712a2487bdb
+
+# 使用技術
+- 言語：TypeScript
+- ライブラリ、FW：React、Next.js
+- CSSフレームワーク：Material-UI
+
+# ローカル環境構築手順
+## ビルド
 ```
 docker-compose build
 ```
 
-node_modulesインストール
+## node_modulesインストール
 ```
 docker-compose run --rm node sh
 yarn install
 exit
 ```
 
-起動
+## コンテナ起動
 ```
 docker-compose up -d
 ```
+
+## 画面起動
+http://localhost:3000
