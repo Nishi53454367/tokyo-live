@@ -27,5 +27,11 @@ exit
 docker-compose up -d
 ```
 
+## .env.localをapp直下に作成
+ファイル中身
+```
+NEXT_PUBLIC_GOOGLE_API_KEY={GoogleMapAPIキー}
+```
+
 ## 画面起動
 http://localhost:3000
