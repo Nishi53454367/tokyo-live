@@ -2,8 +2,8 @@ name: Scheduled build
 
 on:
   schedule:
-    # 毎日03:01にビルド(UTCで18:01)
-    - cron: '01 18 * * *'
+    # 毎週日曜03:01にビルド(UTCで18:01)
+    - cron: '01 18 * * 0'
 
 jobs:
   build:
