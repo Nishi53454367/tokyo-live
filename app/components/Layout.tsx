@@ -26,10 +26,10 @@ const useStyles = makeStyles(() => createStyles({
 }));
 
 type Props = {
-  cameraList: CameraInfo[] | undefined;
-  selectCamera: (
+  cameraList?: CameraInfo[];
+  selectCamera?: (
     option: ValueType<{ label: string; value: { location: Location } }, false>
-  ) => void | undefined;
+  ) => void;
 }
 
 /** 共通レイアウト */
