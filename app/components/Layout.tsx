@@ -26,7 +26,10 @@ const useStyles = makeStyles(() => createStyles({
 }));
 
 type Props = {
+  children: React.ReactNode;
+  // eslint-disable-next-line react/require-default-props
   cameraList?: CameraInfo[];
+  // eslint-disable-next-line react/require-default-props
   selectCamera?: (
     option: ValueType<{ label: string; value: { location: Location } }, false>
   ) => void;

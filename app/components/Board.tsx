@@ -15,8 +15,12 @@ const useStyles = makeStyles(() => createStyles({
   },
 }));
 
+type Props = {
+  children: React.ReactNode;
+}
+
 /** このサイトについて、プライバシーポリシー専用レイアウト */
-const Board: React.FC = ({ children }) => {
+const Board: React.FC<Props> = ({ children }) => {
   const classes = useStyles();
   const router = useRouter();
   return (
